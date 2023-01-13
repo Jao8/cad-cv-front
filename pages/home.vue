@@ -1,6 +1,9 @@
 <template>
   <div>
     <b-card class="text-center">
+      <b-card-header>
+        <h1>Lista de Curriculos</h1>
+      </b-card-header>
       <div>
         <b-table striped hover
           :items="items" :fields="fields"
@@ -30,6 +33,11 @@
           </template>
         </b-table>
       </div>
+      <b-card-footer>
+        <b-button size="sm" @click="add" class="bg-primary">
+          Adicionar Curriculum
+        </b-button>
+      </b-card-footer>
     </b-card>
 
     <b-modal id="modal-remove" title="Remove Curriculum" hide-footer>
@@ -152,6 +160,9 @@
       },
       edit(item) {
         this.$router.push({ name: 'edit-cv-id', params: { id: item.id } });
+      },
+      add(){
+        this.$router.push({ name: 'add-cv' });
       },
     },
   };
