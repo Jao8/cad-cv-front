@@ -63,8 +63,8 @@ export default {
       }
     },
     redirect: {
-      login: '/login',
-      logout:'/login',
+      login: '/',
+      logout:'/',
       home: '/curriculos'
     }
   },
