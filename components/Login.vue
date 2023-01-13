@@ -3,19 +3,30 @@
     <div class="title text-center font-weight-bolder justify-content-start">
       <h1>Login</h1>
     </div>
-    <form>
-      <div class="form-group">
-        <label for="emailInput">Email</label>
-        <input type="text" class="form-control" id="emailInput" placeholder="Insira seu email">
-      </div>
-      <div class="form-group">
-        <label for="passwordInput">Senha</label>
-        <input type="text" class="form-control" id="passwordInput" placeholder="Insira sua senha">
-      </div>
+    <b-form @submit="onSubmit">
+      <b-form-group id="input-group-1" label="Seu email:" label-for="input-1">
+        <b-form-input
+          id="input-1"
+          v-model="form.email"
+          placeholder="Email"
+          required
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-2" label="Sua Senha:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          type="password"
+          v-model="form.password"
+          placeholder="Senha"
+          required
+        ></b-form-input>
+      </b-form-group>
+
       <div class="d-flex justify-content-center mt-3">
-        <button type="button" @click.prevent="login" class="btn btn-primary">Entrar</button>
+        <button type="submit" class="btn btn-primary">Entrar</button>
       </div>
-    </form>
+    </b-form>
   </div>
 </template>
 
@@ -28,19 +39,21 @@ export default {
   data() {
     return {
       form: {
-        email:'gestao@evtek.com',
-        password:'gestor123'
+        email:'',
+        password:''
       }
     }
   },
 
   methods: {
-    login() {
+    onSubmit(event) {
+      event.preventDefault()
       console.log(`start login as: `, this.form);
       this.$auth.loginWith('laravelSanctum',{
         data: this.form
       }).then((response) => {
         console.log(`login success: `, response);
+        this.$router.push('/add-cv');
       }).catch((error) => {
         console.log(`login error: `, error);
       });
